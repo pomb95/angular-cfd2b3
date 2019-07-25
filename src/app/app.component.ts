@@ -26,20 +26,23 @@ export class AppComponent  {
 
   groupByMonth(): void {
     let result = new Array<Test[]>();
+    
     this.list = this.tri();
-    let j = 0;
     let i = 0;
+    let j = 0;
     let pivot = new Date();
-    while( i < this.list.length ) {
+    while (i < this.list.length) {
+      console.log('while 1 = ', i);
       pivot = this.list[i].date;
       result.push([]);
-      while (pivot.getMonth() === this.list[i].date.getMonth() && i < this.list.length){
-        console.log(i);
+      while ( i < this.list.length && pivot.getMonth() === this.list[i].date.getMonth() ) {
+        console.log('while 2 = ', i);
         result[j].push(this.list[i]);
+        console.log(result);
         i++;
       }
       j++;
-    }
+    } 
     console.log(result);
   }
 
