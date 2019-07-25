@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'my-app',
@@ -7,13 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
 
+  constructor(private datePipe: DatePipe) {}
+
   private selectedDate: Date;
 
   list: Test[] = [
-    new Test(1, new Date( 1995, 6, 25))
-   // new Test(2, new Date( 2018, 7, 23)),
-    //new Test(5, new Date(2003, 5, 1)),
-    //new Test(4, new Date(1980, 2, 24))
+    new Test(1, new Date("1995-6-25")),
+    new Test(2, new Date( "2018-7-23")),
+    new Test(5, new Date("2003, 5, 1")),
+    new Test(4, new Date("1980, 2, 24"))
   ];
 
   tri() : void {
@@ -22,6 +25,14 @@ export class AppComponent  {
     );
     console.log(this.list);
     console.log(this.selectedDate);
+  }
+
+  conversion() : void {
+    console.log(this.list);
+    for (let element of this.list) {
+     element.date = new Date(this.datePipe.transform(element.date, 'yyyy-MM-dd'));
+    }
+    console.log(this.list);
   }
 
   addDate(): void {
