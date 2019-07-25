@@ -16,15 +16,31 @@ export class AppComponent  {
     new Test(1, new Date("1995-6-25")),
     new Test(2, new Date( "2018-7-23")),
     new Test(5, new Date("2003, 5, 1")),
-    new Test(4, new Date("1980, 2, 24"))
+    new Test(4, new Date("1980, 2, 24")),
+    new Test(5, new Date("2003, 5, 2"))
   ];
 
-  tri() : void {
-    console.log(
-      this.list.sort((x, y) => x.date - y.date)
-    );
-    console.log(this.list);
-    console.log(this.selectedDate);
+  tri() : Test[] {
+   return this.list.sort((x, y) => x.date - y.date);
+  }
+
+  groupByMonth(): void {
+    let result = new Array<Test[]>();
+    this.list = this.tri();
+    let j = 0;
+    let i = 0;
+    let pivot = new Date();
+    while( i < this.list.length ) {
+      pivot = this.list[i].date;
+      result.push([]);
+      while (pivot.getMonth() === this.list[i].date.getMonth() && i < this.list.length){
+        console.log(i);
+        result[j].push(this.list[i]);
+        i++;
+      }
+      j++;
+    }
+    console.log(result);
   }
 
   conversion() : void {
