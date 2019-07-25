@@ -1,4 +1,9 @@
-<div *ngFor="let personne of list">
-  {{personne.prenom}} {{personne.nom}}
+<div *ngFor="let element of list">
+  {{element.date.toDateString()}}
 </div>
 <button (click)="tri()">Tri</button>
+
+<div>
+  <input type="date" [(ngModel)]="selectedDate">
+  <button (onClick)="addDate()">add</button>
+</div>
